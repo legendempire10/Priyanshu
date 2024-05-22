@@ -1,0 +1,87 @@
+from tkinter import *
+from tkinter import messagebox, ttk
+
+class Student:
+    def __init__(self, student_id, student_name, student_faculty):
+        self.student_id = student_id
+        self.student_name = student_name
+        self.student_faculty = student_faculty
+
+    def get_info(self):
+        return f'ID: {self.student_id}, NAME: {self.student_name}, FACULTY: {self.student_faculty}'
+
+class StudentRecordsApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title('Student Records')
+
+        self.add_label = Label(root, text="Add Student Record", font=("Arial", 16, "bold"))
+        self.add_label.grid(row=0, column=0, columnspan=2, pady=10)
+
+        self.student_id_label = Label(root, text="Student ID:", font=("Arial", 16, "bold"))
+        self.student_id_label.grid(row=1, column=0, padx=10, pady=5, sticky="e")
+
+        self.student_name_label = Label(root, text="Student Name:", font=("Arial", 16, "bold"))
+        self.student_name_label.grid(row=2, column=0, padx=10, pady=5, sticky="e")
+
+        self.student_faculty_label = Label(root, text="Student Faculty:", font=("Arial", 16, "bold"))
+        self.student_faculty_label.grid(row=3, column=0, padx=10, pady=5, sticky="e")
+
+        self.student_id_entry = Entry(root)
+        self.student_id_entry.grid(row=1, column=1, padx=10, pady=5)
+
+        self.student_name_entry = Entry(root)
+        self.student_name_entry.grid(row=2, column=1, padx=10, pady=5)
+
+        self.student_faculty_entry = Entry(root)
+        self.student_faculty_entry.grid(row=3, column=1, padx=10, pady=5)
+
+        self.add_button = Button(root, text="Add Student", command=self.add_student)
+        self.add_button.grid(row=4, column=0, columnspan=2, pady=10)
+
+        self.display_button = Button(root, text="Display", command=self.display_records)
+        self.display_button.grid(row=5, column=0, columnspan=2, pady=10)
+
+        self.student_records = []
+
+    def add_student(self):
+        student_id = self.student_id_entry.get()
+        student_name = self.student_name_entry.get()
+        student_faculty = self.student_faculty_entry.get()
+
+        if student_id and student_name and student_faculty:
+            student = Student(student_id, student_name, student_faculty)
+            self.student_records.append(student)
+            self.clear_entries()
+        else:
+            self.show_alert("Please fill in all fields.")
+
+    def display_records(self):
+        records_window = Toplevel(self.root)
+        records_window.title("Display Records")
+
+        records_label = Label(records_window, text="Display Student Records", font=("Arial", 16, "bold"))
+        records_label.grid(row=0, column=0, padx=10, pady=10, columnspan=2)
+
+        record_treeview = ttk.Treeview(records_window, columns=("ID", "Name", "Faculty"), show="headings")
+        record_treeview.heading("ID", text="Student ID")
+        record_treeview.heading("Name", text="Student Name")
+        record_treeview.heading("Faculty", text="Student Faculty")
+        record_treeview.grid(row=1, column=0, padx=10, pady=5, columnspan=2)
+
+        for student in self.student_records:
+            info = student.get_info().split(",")
+            record_treeview.insert("", END, values=(info[0].split(":")[1].strip(),info[1].split(":")[1].strip(),info[2].split(':')[1].strip()))
+
+    def clear_entries(self):
+        self.student_id_entry.delete(0, END)
+        self.student_name_entry.delete(0, END)
+        self.student_faculty_entry.delete(0, END)
+
+    def show_alert(self, message):
+        messagebox.showwarning("Warning", message)
+
+if __name__ == "__main__":
+    root = Tk()
+    app = StudentRecordsApp(root)
+    root.mainloop()
