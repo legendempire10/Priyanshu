@@ -1,0 +1,618 @@
+{Making website with the help of Python, Html and CSS}
+
+
+:{For main.py}
+from flask import Flask,render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+if __name__ =='__main__':
+    app.run(debug =True)
+
+:{for index.html}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>EMPIRE10</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .full-page-background {
+            background: url('background.jpg') center/cover no-repeat;
+            height: 100vh;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: ##2ecc71;
+        }
+
+        .menu ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .menu ul li {
+            margin-right: 20px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: ##2ecc71;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .menu a:hover {
+            color: #3498db;
+        }
+
+        .content {
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #0FFF50;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .par {
+            font-style: italic;
+            color: ##2ecc71;
+            margin-bottom: 30px;
+        }
+
+        .why-freelance {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .why-freelance strong {
+            font-weight: bold;
+            color: #2ecc71;
+        }
+
+        .join-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .join-button:hover {
+            background-color: #267bb5;
+        }
+
+        .animated-element {
+            width: 50px;
+            height: 50px;
+            background-color: #3498db;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(10px);
+            }
+        }
+
+        .image-container {
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body class="full-page-background">
+
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <a href="/" class="logo">EMPIRE ARENA</a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content">
+            <h1>Freelance with Me</h1>
+            <p class="par">
+                I hope this message finds you well. 🌟<br><br>
+                I am thrilled to extend an invitation for you to embark on a journey of collaboration and creativity.
+                <br>We are currently launching a freelance project that presents an excellent opportunity for skilled
+                <br>individuals like yourself to showcase your talents.<br><br>
+                <div class="why-freelance">
+                    <strong>Why Freelance with Us?</strong><br>
+                    - Trusted Work: Our projects are curated to provide you with meaningful and trustworthy assignments.<br>
+                    - Collaboration: Join us in building a strong and reliable partnership where your skills are valued.<br>
+                    - Success Together: Together, we can create successful projects that contribute to our growth and
+                    <br>mutual
+                    success.<br><br>
+                    Let's work together to build a foundation of trust and success. Your expertise is a valuable asset, and
+                    <br>I
+                    believe our collaboration will lead to outstanding results.<br><br>
+                    If you are interested, please reach out, and we can discuss the exciting projects awaiting us.<br><br>
+                    Looking forward to the prospect of working together.
+                </div>
+            </p>
+            <div class="animated-element"></div>
+            <div class="image-container">
+                <img src="https://freelancecorner.co.uk/wp-content/uploads/2021/07/How-to-become-a-freelance-web-designer-featured-image-1200X630-1.jpg" alt="Freelance Image">
+            </div>
+            <p>
+                Enroll with us to make some projects, gain knowledge, and start earning.<br>
+                <a href="/contact" class="join-button">Click here to join!!</a>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2023. Developed by Priyanshu Labh
+    </footer>
+
+</body>
+
+</html>
+
+:{for about.html}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>About | EMPIRE10</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .full-page-background {
+            background: url('background_about.jpg') center/cover no-repeat;
+            height: 100vh;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: ##2ecc71;
+        }
+
+        .menu ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .menu ul li {
+            margin-right: 20px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #white;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .menu a:hover {
+            color: #3498db;
+        }
+
+        .content {
+            text-align: center;
+            padding: 50px;
+            color: #ff4000;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #bfff00;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body class="full-page-background">
+
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <a href="/" class="logo">EMPIRE ARENA</a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content">
+            <h1>About Us</h1>
+            <p>
+                At our organization, freelancing involves collaborating with skilled individuals on meaningful and trustworthy projects.
+                Here's how it works:
+            </p>
+            <div class="about-section">
+                <p><strong>Project Curation:</strong> We carefully curate projects that offer valuable assignments to freelancers.</p>
+                <p><strong>Partnership Building:</strong> Join us in establishing strong and reliable partnerships where your skills are valued.</p>
+                <p><strong>Success Together:</strong> Together, we work on successful projects that contribute to our mutual growth and success.</p>
+            </div>
+
+            <h2>Why We Formed It:</h2>
+            <p>
+                Our organization was formed with a specific vision and purpose:
+            </p>
+            <div class="about-section">
+                <p><strong>Empowering Talent:</strong> We aim to empower talented individuals by providing a platform to showcase their skills and expertise.</p>
+                <p><strong>Collaborative Community:</strong> Creating a collaborative community where freelancers and our organization can work together harmoniously.</p>
+                <p><strong>Mutual Success:</strong> By fostering a culture of collaboration and trust, we believe in achieving mutual success with freelancers.</p>
+            </div>
+
+            <p>
+                In essence, our organization was formed to create a space where skilled individuals can thrive, collaborate, and contribute to the success of meaningful projects.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2023. Developed by Priyanshu Labh
+    </footer>
+
+</body>
+
+</html>
+
+:{for contact.html}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Contact | EMPIRE10</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        /* Additional styles for form design */
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Style for the highlighted response */
+        .highlighted-response {
+            color: crimson;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body class="full-page-background">
+
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h1 class="logo">EMPIRE ARENA</h1>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content">
+            <h1>Contact Us</h1>
+            <p>Feel free to reach out to us using the following contact details:</p>
+            <ul>
+                <li>Email: info@empirearena.com</li>
+                <li>Phone: +123456789</li>
+            </ul>
+
+            <!-- Freelancer Sign-up Form -->
+            <form action="/freelancer_signup" method="post">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="skills">Your Skills:</label>
+                <input type="text" id="skills" name="skills" required>
+
+                <label for="message">Additional Message:</label>
+                <textarea id="message" name="message" rows="4"></textarea>
+
+                <button type="submit">Sign Up for Freelancing</button>
+            </form>
+
+            <!-- Highlighted Response with crimson color -->
+            <p class="highlighted-response">Any query? We will contact you after we receive your sign-up details.</p>
+        </div>
+    </div>
+
+</body>
+<footer>
+    &copy; 2023. Developed by Priyanshu Labh
+</footer>
+</html>
+
+:{for style.css}
+
+body, h1, h2, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Global styles */
+body.full-page-background {
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+}
+
+/* Header styles */
+.main {
+    color: white;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+}
+
+.menu ul li {
+    margin-right: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Content styles */
+.content {
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.join-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3b9c7a;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.join-button:hover {
+    background-color: #2e7c61;
+}
+.logo {
+    color: orange; /* Change text color to orange */
+    text-decoration: none;
+    cursor: pointer; /* Add cursor style to indicate it's clickable */
+    font-size: 24px; /* Set the desired font size, adjust as needed */
+}
+
+/* Add a hover effect for the clickable logo */
+.logo:hover {
+    text-decoration: underline;
+}
+/* Add this style for the clickable navigation links */
+.menu a {
+    text-decoration: none;
+    color: orange; /* Set default color to orange */
+    transition: color 0.3s; /* Add transition for a smooth color change */
+}
+
+/* Add a hover effect for the navigation links */
+.menu a:hover {
+    color: red; /* Change color to red on hover */
+}
+
+/* Add this style for the active link (clicked) */
+.menu a.active {
+    color: red; /* Set color to red when the link is active (clicked) */
+    transform: scale(1.2); /* Add a pop effect using scale */
+}
+/* Add margin-right for spacing between navigation links */
+.menu ul li {
+    margin-right: 80px; /* Adjust the spacing as needed */
+}
+
+/* Add this style for the clickable navigation links */
+.menu a {
+    text-decoration: none;
+    color: orange; /* Set default color to orange */
+    transition: color 0.3s; /* Add transition for a smooth color change */
+}
+
+/* Add a hover effect for the navigation links */
+.menu a:hover {
+    color: red; /* Change color to red on hover */
+}
+
+/* Add this style for the active link (clicked) */
+.menu a.active {
+    color: red; /* Set color to red when the link is active (clicked) */
+    transform: scale(1.2); /* Add a pop effect using scale */
+}
+/* Add this style for the highlighted response */
+.highlighted-response {
+    background-color: #ffff99; /* Adjust the background color as needed */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+footer {
+            background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+            color: white;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .about {
+    background-image: url('background_about.jpg'); /* Replace with your background image URL or path */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    margin: 0; /* Reset margin to eliminate any default margin */
+    padding: 0; /* Reset padding to eliminate any default padding */
+}
+
+
+
+
+
