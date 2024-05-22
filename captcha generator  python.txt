@@ -1,0 +1,77 @@
+CAPTCHA GENERATER
+..........USING PYTHON.................
+some captcha png files needs to be added for it to work<>
+
+# FOR CAPTCHA
+
+import random
+from tkinter import *
+from PIL import Image, ImageTk
+from captcha.image import ImageCaptcha
+
+coin = random.randint(0, 1)
+
+
+def gencap():
+    return str(random.randint(999, 9999))
+
+
+def clear():
+    boxE.delete(0, END)
+
+
+def play():
+    a = boxE.get()
+    if a == captcha_text:
+        outcome = Label(text="Successfully entered captcha.")
+        outcome.grid(row=3, column=1, columnspan=3)
+        clear()
+        img.destroy()
+        box.destroy()
+        boxE.destroy()
+        button.destroy()
+        exitt = Button(text="exit", command=exit)
+        exitt.grid(row=4, column=2)
+    else:
+        clear()
+        gennewcap()
+
+
+def gennewcap():
+    global captcha_text, image, photo
+    captcha_text = gencap()
+    image = ImageCaptcha(width=250, height=90)
+    image.write(captcha_text, 'captcha.png')
+    photo = Image.open('captcha.png')
+    photo = ImageTk.PhotoImage(photo)
+    img.configure(image=photo)
+    img.image = photo
+
+
+root = Tk()
+
+
+captcha_text = gencap()
+
+
+image = ImageCaptcha(width=250, height=90)
+image.write(captcha_text, 'captcha.png')
+image = Image.open("captcha.png")
+photo = ImageTk.PhotoImage(image)
+
+
+img = Label(image=photo)
+img.grid(row=1, column=1, columnspan=5)
+
+
+box = Label(text="Input Captcha: ")
+boxE = Entry(root)
+box.grid(row=2, column=1)
+boxE.grid(row=2, column=2)
+
+
+button = Button(text="ENTER", command=play)
+button.grid(row=2, column=3)
+
+
+root.mainloop()
